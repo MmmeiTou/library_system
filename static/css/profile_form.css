@@ -1,0 +1,178 @@
+/* ==================== 基础样式 ==================== */
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: white;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* ==================== 主容器 ==================== */
+.container {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.form-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* ==================== 卡片头部 ==================== */
+.card-header {
+    padding: 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+.card-header h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* ==================== 表单样式 ==================== */
+.profile-form {
+    padding: 24px;
+}
+
+.form-section {
+    margin-bottom: 24px;
+}
+
+.form-section:last-of-type {
+    margin-bottom: 0;
+}
+
+.form-section h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ==================== 表单控件美化 ==================== */
+.form-fields p {
+    margin: 0;
+}
+
+.form-fields label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.form-fields input,
+.form-fields select,
+.form-fields textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #333;
+    background: #f8f9fa;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-fields input:focus,
+.form-fields select:focus,
+.form-fields textarea:focus {
+    background: white;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.form-fields input::placeholder {
+    color: #9ca3af;
+}
+
+/* ==================== 错误提示 ==================== */
+.form-fields .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0 0;
+}
+
+.form-fields .errorlist li {
+    font-size: 13px;
+    color: #dc2626;
+    padding: 4px 0;
+}
+
+.form-fields input:invalid:not(:placeholder-shown),
+.form-fields select:invalid:not(:placeholder-shown) {
+    border-color: #dc2626;
+}
+
+/* ==================== 按钮区域 ==================== */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #f1f3f4;
+    color: #374151;
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+    transform: translateY(-2px);
+}
+
+/* ==================== 响应式 ==================== */
+@media (max-width: 520px) {
+    body {
+        padding: 20px 16px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}

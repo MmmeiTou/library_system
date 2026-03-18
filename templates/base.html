@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}图书管理系统{% endblock %}</title>
+    
+    <!-- 内联基础样式，不依赖外部库 -->
+    <style>
+        /* 基础重置 - 仅作用于本页面 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Microsoft YaHei", Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; }
+    </style>
+    
+    <!-- 独立 CSS 文件 -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <!-- 页面加载动画 -->
+    <div class="bs-loader" id="bsLoader">
+        <div class="bs-loader-spinner"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="bs-navbar" id="bsNavbar">
+        <div class="bs-navbar-inner">
+            <a class="bs-brand" href="/">
+                <i class="bs-icon">📚</i>
+                <span>图书管理系统</span>
+            </a>
+            
+            <button class="bs-menu-btn" id="bsMenuBtn">
+                <i class="bs-icon">☰</i>
+            </button>
+            
+            <div class="bs-nav-menu" id="bsNavMenu">
+                {% if user.is_authenticated %}
+                    <div class="bs-user-info">
+                        <div class="bs-avatar">{{ user.username|first|upper }}</div>
+                        <span>欢迎, {{ user.username }}</span>
+                    </div>
+                    <form method="post" action="{% url 'logout' %}" style="display: contents;">
+                        {% csrf_token %}
+                        <button type="submit" class="bs-btn bs-btn-logout">
+                            <i class="bs-icon">退出</i> 注销
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="bs-btn bs-btn-link">
+                        <i class="bs-icon">→</i> 登录
+                    </a>
+                    <a href="{% url 'signup_student' %}" class="bs-btn bs-btn-link">
+                        <i class="bs-icon">🎓</i> 学生注册
+                    </a>
+                    <a href="{% url 'signup_librarian' %}" class="bs-btn bs-btn-link">
+                        <i class="bs-icon">👤</i> 管理员注册
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    {% if messages %}
+    <div class="bs-messages-container">
+        {% for message in messages %}
+        <div class="bs-message bs-message-{{ message.tags }}">
+            <span class="bs-message-text">{{ message }}</span>
+            <button type="button" class="bs-message-close" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- 主内容区域 -->
+    <main class="bs-main">
+        <div class="bs-content" id="bsContent">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- 独立 JS 文件 -->
+    <script src="{% static 'js/base.js' %}"></script>
+    
+    {% block extra_js %}{% endblock %}
+   
+</body>
+</html>

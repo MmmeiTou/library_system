@@ -1,0 +1,87 @@
+/* Form container */
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    /* Form box styling */
+    .form-box {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+
+    /* Heading styling */
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    /* Styling for each <p> tag rendered by form.as_p */
+    form p {
+        margin-bottom: 20px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    /* Focus effect on input fields */
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    /* Placeholder styling */
+    input::placeholder, textarea::placeholder {
+        color: #aaa;
+    }
+
+    /* Submit button styling */
+    button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 20px;
+    }
+
+    /* Submit button hover effect */
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+    }
+
+    /* Cancel button styling */
+    .btn-secondary {
+        width: 100%;
+        padding: 15px;
+        background: #f1f1f1;
+        color: #333;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
+        text-align: center;
+        display: block;
+        text-decoration: none;
+    }
+
+    /* Cancel button hover effect */
+    .btn-secondary:hover {
+        background: #e0e0e0;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}个人资料 - 图书管理系统{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/profile_detail.css' %}">
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>个人资料</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>用户名：</strong> {{ user_obj.username }}</p>
+            <p><strong>邮箱：</strong> {{ user_obj.email }}</p>
+            {% if user_obj.student_profile %}
+                <p><strong>学号：</strong> {{ user_obj.student_profile.student_id }}</p>
+            {% elif user_obj.librarian_profile %}
+                <p><strong>工号：</strong> {{ user_obj.librarian_profile.employee_id }}</p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'profile_edit' %}" class="btn btn-primary">编辑个人资料</a>
+            <a href="{% url 'password_change' %}" class="btn btn-warning">修改密码</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">返回首页</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

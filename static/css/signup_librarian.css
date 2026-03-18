@@ -1,0 +1,82 @@
+/* Container for the form */
+    .register-container {
+        max-width: 450px;
+        margin: 50px auto;
+        padding: 0 20px;
+    }
+
+    /* Box surrounding the form */
+    .register-box {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+    }
+
+    /* Title styling */
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    /* Styling for each <p> tag rendered by form.as_p */
+    form p {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    /* Focus effect on input fields */
+    input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    /* Placeholder styling */
+    input::placeholder {
+        color: #aaa;
+    }
+
+    /* Styling for the submit button */
+    button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+    }
+
+    /* Hover effect for the button */
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+    }
+
+    /* Styling for the link to login */
+    .login-link {
+        text-align: center;
+        margin-top: 25px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .login-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }

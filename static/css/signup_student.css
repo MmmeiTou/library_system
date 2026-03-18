@@ -1,0 +1,71 @@
+/* Container for the registration form */
+    .register-container {
+        max-width: 450px;
+        margin: 50px auto;
+        padding: 0 20px;
+    }
+
+    /* The box containing the form */
+    .register-box {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+    }
+
+    /* Title styling */
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    /* Style for the p tags that wrap form fields */
+    form p {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    /* Focused input field styling */
+    input:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+
+    /* Button styling */
+    button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+    }
+
+    /* Button hover effect */
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.35);
+    }
+
+    /* Link styling for existing users */
+    p a {
+        color: #4caf50;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    /* Link hover effect */
+    p a:hover {
+        text-decoration: underline;
+    }

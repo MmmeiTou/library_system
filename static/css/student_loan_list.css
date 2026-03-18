@@ -1,0 +1,338 @@
+/* my_loans.css */
+
+/* ==================== 基础样式 ==================== */
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ==================== 主容器 ==================== */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ==================== 页面标题 ==================== */
+.page-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.page-subtitle {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+}
+
+/* ==================== 卡片容器 ==================== */
+.card-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.card-header-custom {
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-body-custom {
+    padding: 25px;
+}
+
+/* ==================== 筛选按钮 ==================== */
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-weight: 500;
+    color: #555;
+    margin-right: 5px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-btn.btn-primary {
+    background: #3498db;
+    color: white;
+    border: 1px solid #3498db;
+}
+
+.filter-btn.btn-outline-primary {
+    background: white;
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.filter-btn.btn-warning {
+    background: #e67e22;
+    color: white;
+    border: 1px solid #e67e22;
+}
+
+.filter-btn.btn-outline-warning {
+    background: white;
+    color: #e67e22;
+    border: 1px solid #e67e22;
+}
+
+.filter-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ==================== 表格样式 ==================== */
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.custom-table thead th {
+    background: #34495e;
+    color: white;
+    font-weight: 500;
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.custom-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.custom-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.custom-table tbody td {
+    padding: 12px;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+/* ==================== 状态标签 ==================== */
+.status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-overdue {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.status-normal {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.status-borrowing {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+}
+
+/* ==================== 操作按钮 ==================== */
+.action-btn-return {
+    padding: 6px 14px;
+    background: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.action-btn-return:hover {
+    background: #d35400;
+    color: white;
+}
+
+/* ==================== 空状态 ==================== */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #999;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+/* ==================== 分页 ==================== */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.custom-pagination {
+    display: flex;
+    list-style: none;
+    gap: 6px;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.page-link:hover {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.page-item.active .page-link {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ==================== 返回按钮 ==================== */
+.back-section {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: white;
+    color: #3498db;
+    border: 1px solid #3498db;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* ==================== 统计信息 ==================== */
+.stats-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3498db;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 3px;
+}
+
+/* ==================== 响应式 ==================== */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .card-body-custom {
+        padding: 15px;
+    }
+    
+    .custom-table thead th,
+    .custom-table tbody td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+    
+    .filter-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .stats-bar {
+        flex-direction: column;
+    }
+    
+    .stat-item {
+        width: 100%;
+    }
+}

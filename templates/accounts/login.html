@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<div class="login-container">
+    <h2>🔐 用户登录</h2>
+    
+    <!-- 显示非字段错误（如无效用户名/密码） -->
+    {% if form.non_field_errors %}
+    <div class="alert-error">
+        <i class="bi bi-exclamation-circle"></i>
+        {{ form.non_field_errors.0 }}
+    </div>
+    {% endif %}
+    
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label>用户名</label>
+            <input 
+                type="text" 
+                name="{{ form.username.name }}" 
+                value="{{ form.username.value|default:'' }}"
+                class="{% if form.username.errors %}is-invalid{% endif %}"
+                placeholder="请输入用户名"
+                autocomplete="username"
+            >
+            {% if form.username.errors %}
+            <div class="invalid-feedback">
+                <i class="bi bi-x-circle me-1"></i>{{ form.username.errors.0 }}
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label>密码</label>
+            <input 
+                type="password" 
+                name="{{ form.password.name }}" 
+                class="{% if form.password.errors %}is-invalid{% endif %}"
+                placeholder="请输入密码"
+                autocomplete="current-password"
+            >
+            {% if form.password.errors %}
+            <div class="invalid-feedback">
+                <i class="bi bi-x-circle me-1"></i>{{ form.password.errors.0 }}
+            </div>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="btn-login">立即登录</button>
+    </form>
+    
+    <div class="links">
+        <a href="{% url 'signup_student' %}">学生注册</a>
+        <a href="{% url 'signup_librarian' %}">管理员注册</a>
+        <br><br>
+        <a href="{% url 'forgot_password' %}">忘记密码？</a>
+    </div>
+</div>
+{% endblock %}

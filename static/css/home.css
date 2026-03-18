@@ -1,0 +1,234 @@
+.home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* 欢迎卡片 */
+.welcome-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 50px 40px;
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4);
+}
+
+.welcome-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.welcome-icon i {
+    font-size: 40px;
+}
+
+.welcome-card h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.welcome-text {
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* 通用卡片样式 */
+.user-info-card,
+.quick-actions-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.card-header {
+    background: #f8f9ff;
+    padding: 18px 25px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-header i {
+    color: #667eea;
+    font-size: 20px;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* 用户信息样式 */
+.user-type {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8f9ff;
+}
+
+.user-type.student {
+    border-left: 4px solid #4caf50;
+}
+
+.user-type.librarian {
+    border-left: 4px solid #667eea;
+}
+
+.user-type.unknown {
+    border-left: 4px solid #ff9800;
+}
+
+.user-type i {
+    font-size: 36px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.user-type.student i {
+    background: #e8f5e9;
+    color: #4caf50;
+}
+
+.user-type.librarian i {
+    background: #ede7f6;
+    color: #667eea;
+}
+
+.user-type.unknown i {
+    background: #fff3e0;
+    color: #ff9800;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.user-label {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.user-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 快捷操作按钮 */
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    transition: all 0.3s;
+}
+
+.action-btn:last-child {
+    margin-bottom: 0;
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+/* 学生操作按钮 */
+.action-btn.student-action {
+    background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+}
+
+.action-btn.student-action:hover {
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+}
+
+/* 管理员操作按钮 */
+.action-btn.librarian-action {
+    background: linear-gradient(135deg, #2196f3 0%, #42a5f5 100%);
+}
+
+.action-btn.librarian-action:hover {
+    box-shadow: 0 10px 30px rgba(33, 150, 243, 0.4);
+}
+
+/* 个人资料按钮 */
+.action-btn.profile-action {
+    background: linear-gradient(135deg, #ff9800 0%, #ffb74d 100%);
+}
+
+.action-btn.profile-action:hover {
+    box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+}
+
+.action-btn span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.action-btn i:first-child {
+    font-size: 22px;
+}
+
+.action-btn i:last-child {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    .home-container {
+        padding: 20px 15px;
+    }
+    
+    .welcome-card {
+        padding: 35px 25px;
+    }
+    
+    .welcome-card h1 {
+        font-size: 22px;
+    }
+    
+    .user-type {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .user-details {
+        align-items: center;
+    }
+    
+    .action-btn {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}

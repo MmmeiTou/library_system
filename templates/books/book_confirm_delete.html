@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}确认删除{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/book_confirm_delete.css' %}">
+<div class="delete-confirm-container">
+    <div class="delete-card">
+        <div class="warning-icon">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+        </div>
+        
+        <h1>确认删除</h1>
+        <p class="confirm-text">
+            确定要删除书籍 <strong>"{{ object.title }}"</strong> 吗？
+        </p>
+        <p class="warning-text">
+            ⚠️ 此操作不可逆，删除后数据将无法恢复
+        </p>
+        
+        <div class="action-buttons">
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> 确认删除
+                </button>
+            </form>
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">
+                <i class="bi bi-x"></i> 取消
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

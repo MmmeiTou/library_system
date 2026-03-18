@@ -1,0 +1,305 @@
+/* loan_list.css - 借阅记录列表样式，仿图书列表 */
+
+.loan-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* 标题区域 */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.page-title {
+    color: #333;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-title i {
+    color: #667eea;
+}
+
+/* 筛选按钮区域 */
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-btn.btn-primary {
+    background: #3498db;
+    color: white;
+    border: 1px solid #3498db;
+}
+
+.filter-btn.btn-outline-primary {
+    background: white;
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.filter-btn.btn-warning {
+    background: #e74c3c;
+    color: white;
+    border: 1px solid #e74c3c;
+}
+
+.filter-btn.btn-outline-warning {
+    background: white;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+.filter-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* 表格容器 */
+.table-container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* 表格样式 */
+.loan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.loan-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.loan-table th {
+    color: white;
+    font-weight: 600;
+    padding: 18px 15px;
+    text-align: left;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.loan-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s;
+}
+
+.loan-table tbody tr:hover {
+    background: #f8f9ff;
+}
+
+.loan-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.loan-table td {
+    padding: 16px 15px;
+    color: #555;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/* 状态标签 */
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-overdue {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.status-normal {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* 操作按钮 */
+.action-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    margin-right: 8px;
+    transition: all 0.2s;
+}
+
+.action-btn:last-child {
+    margin-right: 0;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 空数据提示 */
+.empty-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.empty-message i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.empty-message p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* 分页样式 */
+.pagination-container {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 5px;
+}
+
+.page-item {
+    display: inline-block;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px;
+    color: #667eea;
+    text-decoration: none;
+    background: white;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.page-link:hover:not(.disabled) {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    pointer-events: none;
+}
+
+.page-item.disabled .page-link {
+    color: #ccc;
+    background: #f9f9f9;
+    border-color: #eee;
+    pointer-events: none;
+}
+
+.current-page {
+    background: #f8f9ff;
+    color: #667eea;
+    border-color: #667eea;
+    font-weight: 600;
+}
+
+/* 返回链接 */
+.back-link {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.back-link a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.back-link a:hover {
+    color: #764ba2;
+    transform: translateX(-5px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .loan-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .loan-table th,
+    .loan-table td {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+    
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .page-link {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}

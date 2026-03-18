@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/book_list.css' %}">
+<div class="book-list-container">
+    <!-- 页面标题和操作区 -->
+    <div class="header-section">
+        <h1 class="page-title">
+            <i class="bi bi-book"></i> 图书列表
+        </h1>
+        {% if user.is_librarian %}
+        <a href="{% url 'book_create' %}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> 添加新书
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- 搜索表单 -->
+    <form method="get" action="." class="mb-3 search-form">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control search-input" 
+               placeholder="输入图书编号、书名或作者..." value="{{ search }}">
+            <button class="btn btn-primary search-button" type="submit">
+               <i class="bi bi-search"></i> 搜索
+            </button>
+        </div>
+    </form>
+
+
+    <!-- 图书表格 -->
+    <div class="table-container">
+        <table class="book-table">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>剩余数量</th>
+                    <th class="actions-col">操作</th>  <!-- 固定操作列 -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr class="book-row">
+                    <td class="book-id">{{ book.book_id }}</td>
+                    <td class="book-title">{{ book.title }}</td>
+                    <td class="book-author">{{ book.author }}</td>
+                    <td class="book-copies">
+                        <span class="copies-badge {% if book.available_copies == 0 %}no-copies{% elif book.available_copies < 5 %}low-copies{% endif %}">
+                            {{ book.available_copies }}
+                        </span>
+                    </td>
+                    <td class="actions-col">
+                        <!-- 根据用户角色显示不同操作 -->
+                        {% if user.is_librarian %}
+                            <!-- 管理员操作：编辑/删除 -->
+                            <a href="{% url 'book_update' book.pk %}" class="btn btn-sm btn-primary action-btn">
+                                <i class="bi bi-pencil"></i> 编辑
+                            </a>
+                            <a href="{% url 'book_delete' book.pk %}" class="btn btn-sm btn-danger action-btn">
+                                <i class="bi bi-trash"></i> 删除
+                            </a>
+                        {% elif user.student_profile %}
+                            <!-- 学生操作：借书（如果有库存） -->
+                            {% if book.available_copies > 0 %}
+                                <form method="post" action="{% url 'borrow_book' book.pk %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-success action-btn">
+                                        <i class="bi bi-journal-plus"></i> 借书
+                                    </button>
+                                </form>
+                            {% else %}
+                                <span class="text-muted">无库存</span>
+                            {% endif %}
+                        {% else %}
+                            <!-- 未登录或其他用户无操作 -->
+                            <span class="text-muted">——</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="empty-message">
+                        <i class="bi bi-inbox"></i>
+                        <p>暂无图书数据</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 分页控件（保留搜索参数） -->
+    {% if is_paginated %}
+    <nav class="pagination-container" aria-label="Page navigation">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1{% if search %}&search={{ search|urlencode }}{% endif %}">
+                    <i class="bi bi-chevron-double-left"></i> 首页
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search|urlencode }}{% endif %}">
+                    <i class="bi bi-chevron-left"></i> 上一页
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">
+                    <i class="bi bi-chevron-double-left"></i> 首页
+                </span>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">
+                    <i class="bi bi-chevron-left"></i> 上一页
+                </span>
+            </li>
+            {% endif %}
+            
+            <li class="page-item active">
+                <span class="page-link current-page">
+                    第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} 页
+                </span>
+            </li>
+            
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search|urlencode }}{% endif %}">
+                    下一页 <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search|urlencode }}{% endif %}">
+                    末页 <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">
+                    下一页 <i class="bi bi-chevron-right"></i>
+                </span>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">
+                    末页 <i class="bi bi-chevron-double-right"></i>
+                </span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+     <!-- 返回链接 -->
+    <div class="back-to-home">
+        {% if search %}
+            <a href="{% url 'book_list' %}">
+                <i class="bi bi-arrow-left"></i> 返回全部图书列表
+            </a>
+        {% else %}
+            <a href="{% url 'home' %}">
+                <i class="bi bi-house"></i> 返回首页
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

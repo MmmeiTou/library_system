@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {% if object %}编辑书籍{% else %}添加书籍{% endif %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/book_form.css' %}">
+
+<div class="form-container">
+    <div class="form-box">
+        <h1>{% if object %}编辑书籍{% else %}添加书籍{% endif %}</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }} <!-- Render form fields as <p> tags -->
+            
+            <button type="submit" class="btn btn-primary">保存</button>
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">取消</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
