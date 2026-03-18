@@ -116,7 +116,7 @@
     box-shadow: 0 10px 30px rgba(108, 117, 125, 0.35);
 }
 
-/* 响应式设计 */
+/* Responsive Design */
 @media (max-width: 480px) {
     .delete-card {
         padding: 35px 25px;

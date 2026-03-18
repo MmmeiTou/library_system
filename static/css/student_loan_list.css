@@ -1,6 +1,4 @@
-/* my_loans.css */
-
-/* ==================== 基础样式 ==================== */
+/* ==================== Basic Styles ==================== */
 body {
     font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
     background-color: #f5f7fa;
@@ -8,14 +6,14 @@ body {
     line-height: 1.6;
 }
 
-/* ==================== 主容器 ==================== */
+/* ==================== Main Container ==================== */
 .main-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* ==================== 页面标题 ==================== */
+/* ==================== Page Title ==================== */
 .page-header {
     text-align: center;
     margin-bottom: 25px;
@@ -33,7 +31,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* ==================== 卡片容器 ==================== */
+/* ==================== Card Container ==================== */
 .card-container {
     background: white;
     border-radius: 10px;
@@ -50,7 +48,7 @@ body {
     padding: 25px;
 }
 
-/* ==================== 筛选按钮 ==================== */
+/* ==================== Filter Buttons ==================== */
 .filter-section {
     display: flex;
     align-items: center;
@@ -104,7 +102,7 @@ body {
     transform: translateY(-1px);
 }
 
-/* ==================== 表格样式 ==================== */
+/* ==================== Table Styles ==================== */
 .table-wrapper {
     overflow-x: auto;
     border: 1px solid #e0e0e0;
@@ -145,7 +143,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* ==================== 状态标签 ==================== */
+/* ==================== Status Badges ==================== */
 .status-badge {
     display: inline-block;
     padding: 5px 12px;
@@ -172,7 +170,7 @@ body {
     border: 1px solid #bbdefb;
 }
 
-/* ==================== 操作按钮 ==================== */
+/* ==================== Action Buttons ==================== */
 .action-btn-return {
     padding: 6px 14px;
     background: #e67e22;
@@ -191,7 +189,7 @@ body {
     color: white;
 }
 
-/* ==================== 空状态 ==================== */
+/* ==================== Empty State ==================== */
 .empty-state {
     text-align: center;
     padding: 50px 20px;
@@ -204,7 +202,7 @@ body {
     opacity: 0.5;
 }
 
-/* ==================== 分页 ==================== */
+/* ==================== Pagination ==================== */
 .pagination-wrapper {
     display: flex;
     justify-content: center;
@@ -251,7 +249,7 @@ body {
     cursor: not-allowed;
 }
 
-/* ==================== 返回按钮 ==================== */
+/* ==================== Back Button ==================== */
 .back-section {
     text-align: center;
     margin-top: 25px;
@@ -276,7 +274,7 @@ body {
     color: white;
 }
 
-/* ==================== 统计信息 ==================== */
+/* ==================== Statistics Bar ==================== */
 .stats-bar {
     display: flex;
     justify-content: space-around;
@@ -307,7 +305,7 @@ body {
     margin-top: 3px;
 }
 
-/* ==================== 响应式 ==================== */
+/* ==================== Responsive ==================== */
 @media (max-width: 768px) {
     .page-title {
         font-size: 1.5rem;

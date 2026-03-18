@@ -6,40 +6,40 @@
 
 <link rel="stylesheet" href="{% static 'css/book_list.css' %}">
 <div class="book-list-container">
-    <!-- 页面标题和操作区 -->
+    <!-- Page Title and Actions -->
     <div class="header-section">
         <h1 class="page-title">
-            <i class="bi bi-book"></i> 图书列表
+            <i class="bi bi-book"></i> Book List
         </h1>
         {% if user.is_librarian %}
         <a href="{% url 'book_create' %}" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> 添加新书
+            <i class="bi bi-plus-circle"></i> Add New Book
         </a>
         {% endif %}
     </div>
 
-    <!-- 搜索表单 -->
+    <!-- Search Form -->
     <form method="get" action="." class="mb-3 search-form">
         <div class="input-group">
             <input type="text" name="search" class="form-control search-input" 
-               placeholder="输入图书编号、书名或作者..." value="{{ search }}">
+               placeholder="Enter book ID, title, or author..." value="{{ search }}">
             <button class="btn btn-primary search-button" type="submit">
-               <i class="bi bi-search"></i> 搜索
+               <i class="bi bi-search"></i> Search
             </button>
         </div>
     </form>
 
 
-    <!-- 图书表格 -->
+    <!-- Book Table -->
     <div class="table-container">
         <table class="book-table">
             <thead>
                 <tr>
-                    <th>编号</th>
-                    <th>书名</th>
-                    <th>作者</th>
-                    <th>剩余数量</th>
-                    <th class="actions-col">操作</th>  <!-- 固定操作列 -->
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Available Copies</th>
+                    <th class="actions-col">Actions</th>  <!-- Fixed actions column -->
                 </tr>
             </thead>
             <tbody>
@@ -54,29 +54,29 @@
                         </span>
                     </td>
                     <td class="actions-col">
-                        <!-- 根据用户角色显示不同操作 -->
+                        <!-- Show different actions based on user role -->
                         {% if user.is_librarian %}
-                            <!-- 管理员操作：编辑/删除 -->
+                            <!-- Librarian actions: Edit/Delete -->
                             <a href="{% url 'book_update' book.pk %}" class="btn btn-sm btn-primary action-btn">
-                                <i class="bi bi-pencil"></i> 编辑
+                                <i class="bi bi-pencil"></i> Edit
                             </a>
                             <a href="{% url 'book_delete' book.pk %}" class="btn btn-sm btn-danger action-btn">
-                                <i class="bi bi-trash"></i> 删除
+                                <i class="bi bi-trash"></i> Delete
                             </a>
                         {% elif user.student_profile %}
-                            <!-- 学生操作：借书（如果有库存） -->
+                            <!-- Student action: Borrow (if available) -->
                             {% if book.available_copies > 0 %}
                                 <form method="post" action="{% url 'borrow_book' book.pk %}" style="display:inline;">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-sm btn-success action-btn">
-                                        <i class="bi bi-journal-plus"></i> 借书
+                                        <i class="bi bi-journal-plus"></i> Borrow
                                     </button>
                                 </form>
                             {% else %}
-                                <span class="text-muted">无库存</span>
+                                <span class="text-muted">No stock</span>
                             {% endif %}
                         {% else %}
-                            <!-- 未登录或其他用户无操作 -->
+                            <!-- Unauthenticated or other users: no actions -->
                             <span class="text-muted">——</span>
                         {% endif %}
                     </td>
@@ -85,7 +85,7 @@
                 <tr>
                     <td colspan="5" class="empty-message">
                         <i class="bi bi-inbox"></i>
-                        <p>暂无图书数据</p>
+                        <p>No books found</p>
                     </td>
                 </tr>
                 {% endfor %}
@@ -93,60 +93,60 @@
         </table>
     </div>
 
-    <!-- 分页控件（保留搜索参数） -->
+    <!-- Pagination Controls (keep search parameters) -->
     {% if is_paginated %}
     <nav class="pagination-container" aria-label="Page navigation">
         <ul class="pagination">
             {% if page_obj.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page=1{% if search %}&search={{ search|urlencode }}{% endif %}">
-                    <i class="bi bi-chevron-double-left"></i> 首页
+                    <i class="bi bi-chevron-double-left"></i> First
                 </a>
             </li>
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search|urlencode }}{% endif %}">
-                    <i class="bi bi-chevron-left"></i> 上一页
+                    <i class="bi bi-chevron-left"></i> Previous
                 </a>
             </li>
             {% else %}
             <li class="page-item disabled">
                 <span class="page-link">
-                    <i class="bi bi-chevron-double-left"></i> 首页
+                    <i class="bi bi-chevron-double-left"></i> First
                 </span>
             </li>
             <li class="page-item disabled">
                 <span class="page-link">
-                    <i class="bi bi-chevron-left"></i> 上一页
+                    <i class="bi bi-chevron-left"></i> Previous
                 </span>
             </li>
             {% endif %}
             
             <li class="page-item active">
                 <span class="page-link current-page">
-                    第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} 页
+                    Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
                 </span>
             </li>
             
             {% if page_obj.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search|urlencode }}{% endif %}">
-                    下一页 <i class="bi bi-chevron-right"></i>
+                    Next <i class="bi bi-chevron-right"></i>
                 </a>
             </li>
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search|urlencode }}{% endif %}">
-                    末页 <i class="bi bi-chevron-double-right"></i>
+                    Last <i class="bi bi-chevron-double-right"></i>
                 </a>
             </li>
             {% else %}
             <li class="page-item disabled">
                 <span class="page-link">
-                    下一页 <i class="bi bi-chevron-right"></i>
+                    Next <i class="bi bi-chevron-right"></i>
                 </span>
             </li>
             <li class="page-item disabled">
                 <span class="page-link">
-                    末页 <i class="bi bi-chevron-double-right"></i>
+                    Last <i class="bi bi-chevron-double-right"></i>
                 </span>
             </li>
             {% endif %}
@@ -154,15 +154,15 @@
     </nav>
     {% endif %}
 
-     <!-- 返回链接 -->
+     <!-- Back Link -->
     <div class="back-to-home">
         {% if search %}
             <a href="{% url 'book_list' %}">
-                <i class="bi bi-arrow-left"></i> 返回全部图书列表
+                <i class="bi bi-arrow-left"></i> Back to Full Book List
             </a>
         {% else %}
             <a href="{% url 'home' %}">
-                <i class="bi bi-house"></i> 返回首页
+                <i class="bi bi-house"></i> Back to Home
             </a>
         {% endif %}
     </div>

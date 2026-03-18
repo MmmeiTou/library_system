@@ -8,16 +8,13 @@
 
 <div class="register-container">
     <div class="register-box">
-        <h2>🎓 学生注册</h2>
+        <h2>🎓 Student Registration</h2>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}  <!-- Render form as <p> tags -->
-            <button type="submit">注册</button>
+            <button type="submit">Register</button>
         </form>
-        <p>已有账号？ <a href="{% url 'login' %}">登录</a></p>
+        <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
     </div>
 </div>
 {% endblock %}
-
-
-

@@ -41,7 +41,7 @@
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-/* 错误状态 */
+/* Error State */
 .form-group input.is-invalid {
     border-color: #dc3545;
     background-color: #fff5f5;
@@ -51,7 +51,7 @@
     box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
 }
 
-/* 错误提示信息 */
+/* Error Message */
 .invalid-feedback {
     color: #dc3545;
     font-size: 13px;
@@ -63,7 +63,7 @@
     display: block;
 }
 
-/* 全局错误提示 */
+/* Global Error Alert */
 .alert-error {
     background: #fff5f5;
     border: 1px solid #f5c6cb;
@@ -112,4 +112,3 @@
 .links a:hover {
     text-decoration: underline;
 }
-

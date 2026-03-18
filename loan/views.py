@@ -9,11 +9,11 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from books.models import Book
 from .models import LoanRecord
-from books.views import LibrarianRequiredMixin   # 假设已定义，若未定义请自行实现
+from books.views import LibrarianRequiredMixin   # Assumed defined, if not please implement
 from django.db.models import Q
 
 
-# ---------- 列表视图 ----------
+# ---------- List Views ----------
 class StudentLoanListView(LoginRequiredMixin, ListView):
     model = LoanRecord
     template_name = 'loan/student_loan_list.html'
@@ -21,9 +21,9 @@ class StudentLoanListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        # 基础查询集：只显示当前学生的记录
+        # Base queryset: only show current student's records
         queryset = LoanRecord.objects.filter(student_username=self.request.user.username)
-        # 如果请求参数 overdue=1，则只显示逾期记录（借阅中且应还日期早于今天）
+        # If parameter overdue=1, show only overdue records (borrowing and due_date < today)
         if self.request.GET.get('overdue') == '1':
             today = timezone.now().date()
             queryset = queryset.filter(
@@ -34,7 +34,7 @@ class StudentLoanListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # 传递当前筛选状态，用于模板高亮按钮
+        # Pass current filter status to template for button highlighting
         context['overdue_filter'] = self.request.GET.get('overdue') == '1'
         return context
 
@@ -45,10 +45,10 @@ class AdminLoanListView(LibrarianRequiredMixin, ListView):
     context_object_name = 'loans'
     paginate_by = 20
 
-    '''筛选逾期'''
+    '''Filter overdue'''
     def get_queryset(self):
         queryset = super().get_queryset()
-        # 如果请求参数 overdue=1，则只显示逾期记录（借阅中且应还日期早于今天）
+        # If parameter overdue=1, show only overdue records (borrowing and due_date < today)
         if self.request.GET.get('overdue') == '1':
             today = timezone.now().date()
             queryset = queryset.filter(
@@ -59,27 +59,27 @@ class AdminLoanListView(LibrarianRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # 传递当前是否处于逾期筛选状态，用于模板高亮按钮
+        # Pass whether overdue filter is active to template for button highlighting
         context['overdue_filter'] = self.request.GET.get('overdue') == '1'
         return context
 
-# ---------- 借书 ----------
+# ---------- Borrow Book ----------
 @login_required
 @transaction.atomic
 def borrow_book(request, book_id):
-    # 仅学生允许借书
+    # Only students are allowed to borrow
     if not hasattr(request.user, 'student_profile'):
-        messages.error(request, '只有学生才能借书')
+        messages.error(request, 'Only students can borrow books')
         return redirect('book_list')
 
     book = get_object_or_404(Book, pk=book_id)
     if book.available_copies < 1:
-        messages.error(request, '该书暂无库存')
+        messages.error(request, 'This book is currently out of stock')
         return redirect('book_list')
 
-    # 生成唯一借阅编号
+    # Generate unique loan ID
     loan_id = uuid.uuid4().hex[:12].upper()
-    due = timezone.now().date() + timedelta(days=7)   # 7天后应还
+    due = timezone.now().date() + timedelta(days=7)   # Due in 7 days
 
     loan = LoanRecord.objects.create(
         loan_id=loan_id,
@@ -93,51 +93,51 @@ def borrow_book(request, book_id):
     book.available_copies -= 1
     book.save()
 
-    messages.success(request, f'成功借阅《{book.title}》，请于 {due} 前归还')
+    messages.success(request, f'Successfully borrowed "{book.title}". Please return it by {due}')
     return redirect('book_list')
 
-# ---------- 还书 ----------
+# ---------- Return Book ----------
 @login_required
 @transaction.atomic
 def return_book(request, loan_id):
     loan = get_object_or_404(LoanRecord, loan_id=loan_id)
 
-    # 校验权限：必须是记录本人且状态为借阅中
+    # Check permissions: must be the record's owner and status is borrowing
     if request.user.username != loan.student_username:
-        messages.error(request, '无权操作')
+        messages.error(request, 'Permission denied')
         return redirect('student_loan_list')
     if loan.status != 'borrowing':
-        messages.error(request, '该书已归还或状态异常')
+        messages.error(request, 'This book has already been returned or has an abnormal status')
         return redirect('student_loan_list')
 
-    # 更新状态为已归还
+    # Update status to returned
     loan.status = 'returned'
     loan.save()
 
-    # 增加图书库存
+    # Increase book stock
     try:
         book = Book.objects.get(book_id=loan.book_id)
         book.available_copies += 1
         book.save()
     except Book.DoesNotExist:
-        messages.warning(request, '原图书不存在，无法更新库存')
+        messages.warning(request, 'Original book does not exist, cannot update stock')
 
-    messages.success(request, '还书成功')
+    messages.success(request, 'Book returned successfully')
     return redirect('student_loan_list')
 
-# ---------- 管理员删除已归还记录 ----------
+# ---------- Admin Delete Returned Record ----------
 @login_required
 def delete_loan(request, loan_id):
-    # 仅管理员允许删除
+    # Only librarians allowed to delete
     if not hasattr(request.user, 'librarian_profile'):
-        messages.error(request, '无权操作')
+        messages.error(request, 'Permission denied')
         return redirect('admin_loan_list')
 
     loan = get_object_or_404(LoanRecord, loan_id=loan_id)
     if loan.status != 'returned':
-        messages.error(request, '只能删除已归还的记录')
+        messages.error(request, 'Only returned records can be deleted')
         return redirect('admin_loan_list')
 
     loan.delete()
-    messages.success(request, '记录已删除')
+    messages.success(request, 'Record deleted')
     return redirect('admin_loan_list')

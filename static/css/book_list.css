@@ -4,7 +4,7 @@
     padding: 30px 20px;
 }
 
-/* 标题区域 */
+/* Title Section */
 .header-section {
     display: flex;
     justify-content: space-between;
@@ -28,7 +28,7 @@
     color: #667eea;
 }
 
-/* 表格容器 */
+/* Table Container */
 .table-container {
     background: white;
     border-radius: 16px;
@@ -36,7 +36,7 @@
     overflow: hidden;
 }
 
-/* 表格样式 */
+/* Table Styles */
 .book-table {
     width: 100%;
     border-collapse: collapse;
@@ -77,25 +77,25 @@
     vertical-align: middle;
 }
 
-/* 编号列 */
+/* ID Column */
 .book-id {
     color: #888;
     font-weight: 500;
     font-size: 14px;
 }
 
-/* 书名列 */
+/* Book Title Column */
 .book-title {
     font-weight: 600;
     color: #333;
 }
 
-/* 作者列 */
+/* Author Column */
 .book-author {
     color: #666;
 }
 
-/* 数量徽章 */
+/* Copies Badge */
 .copies-badge {
     display: inline-block;
     padding: 6px 14px;
@@ -116,7 +116,7 @@
     color: #ef6c00;
 }
 
-/* 操作列 */
+/* Actions Column */
 .actions-col {
     white-space: nowrap;
 }
@@ -137,7 +137,7 @@
     transform: translateY(-2px);
 }
 
-/* 空数据提示 */
+/* Empty Data Message */
 .empty-message {
     text-align: center;
     padding: 60px 20px;
@@ -155,7 +155,7 @@
     font-size: 16px;
 }
 
-/* 分页样式 */
+/* Pagination Styles */
 .pagination-container {
     margin-top: 35px;
     display: flex;
@@ -218,7 +218,7 @@
     font-weight: 600;
 }
 
-/* 返回首页 */
+/* Back to Home */
 .back-to-home {
     text-align: center;
     margin-top: 40px;
@@ -242,10 +242,10 @@
     transform: translateX(-5px);
 }
 
-/* 搜索表单样式 */
+/* Search Form Styles */
 .search-form {
-    max-width: 500px; /* 限制表单的最大宽度 */
-    margin: 0 auto; /* 居中表单 */
+    max-width: 500px; /* Limit the maximum width of the form */
+    margin: 0 auto; /* Center the form */
 }
 
 .input-group {
@@ -254,37 +254,37 @@
 }
 
 .search-input {
-    flex: 1; /* 让输入框占据剩余空间 */
-    padding: 12px 16px; /* 增加内边距 */
-    font-size: 16px; /* 增大字体大小 */
-    border: 2px solid #e8e8e8; /* 边框样式 */
-    border-radius: 10px 0 0 10px; /* 圆角，与按钮相匹配 */
-    outline: none; /* 去掉焦点时的外边框 */
-    transition: border-color 0.3s ease; /* 边框颜色过渡效果 */
+    flex: 1; /* Let the input field take up remaining space */
+    padding: 12px 16px; /* Increase padding */
+    font-size: 16px; /* Increase font size */
+    border: 2px solid #e8e8e8; /* Border style */
+    border-radius: 10px 0 0 10px; /* Rounded corners matching the button */
+    outline: none; /* Remove focus outline */
+    transition: border-color 0.3s ease; /* Transition effect for border color */
 }
 
 .search-input:focus {
-    border-color: #667eea; /* 聚焦时边框颜色 */
+    border-color: #667eea; /* Border color on focus */
 }
 
 .search-button {
-    padding: 12px 20px; /* 增加按钮的内边距 */
-    font-size: 16px; /* 增大按钮字体大小 */
-    border: none; /* 去掉按钮边框 */
-    border-radius: 0 10px 10px 0; /* 圆角，与输入框相匹配 */
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 渐变背景 */
-    color: white; /* 按钮文字颜色 */
-    cursor: pointer; /* 鼠标指针 */
-    transition: all 0.3s ease; /* 过渡效果 */
+    padding: 12px 20px; /* Increase button padding */
+    font-size: 16px; /* Increase button font size */
+    border: none; /* Remove button border */
+    border-radius: 0 10px 10px 0; /* Rounded corners matching the input */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+    color: white; /* Button text color */
+    cursor: pointer; /* Mouse pointer */
+    transition: all 0.3s ease; /* Transition effect */
 }
 
 .search-button:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%); /* 悬停时渐变背景 */
-    transform: translateY(-2px); /* 悬停时轻微上移 */
-    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3); /* 悬停时阴影效果 */
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%); /* Gradient background on hover */
+    transform: translateY(-2px); /* Slight upward movement on hover */
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3); /* Shadow effect on hover */
 }
 
-/* 响应式设计 */
+/* Responsive Design */
 @media (max-width: 768px) {
     .header-section {
         flex-direction: column;

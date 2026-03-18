@@ -1,20 +1,15 @@
-/**
- * Book System - 精简基础JS（仅保留加载动画和内容动画）
- * 不污染全局，不影响子模板
- */
 (function () {
     'use strict';
 
-    // 只在有 base 元素时执行
     if (!document.getElementById('bsNavbar')) return;
 
-    // 缓存元素
+    // Cache elements
     const el = {
         loader: document.getElementById('bsLoader'),
         content: document.getElementById('bsContent')
     };
 
-    // 页面加载完成 → 隐藏 loader
+    // When the page finishes loading → hide the loader
     function hideLoader() {
         if (el.loader) {
             el.loader.classList.add('hidden');
@@ -28,7 +23,7 @@
         window.addEventListener('load', hideLoader);
     }
 
-    // 内容区动画（MutationObserver 监听变化）
+    // Content area animation (using MutationObserver to detect changes)
     if (el.content) {
         const observer = new MutationObserver(function () {
             el.content.style.opacity = '0';

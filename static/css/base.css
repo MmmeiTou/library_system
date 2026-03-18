@@ -1,9 +1,4 @@
-/* ========================================
-   Book System - 精简基础样式
-   只影响带 bs- 前缀的元素，不污染子模板
-   ======================================== */
-
-/* CSS 变量 */
+/* CSS Variables */
 :root {
     --bs-primary: #5b5fd9;
     --bs-primary-light: #7c7ff2;
@@ -17,7 +12,7 @@
     --bs-transition: all 0.3s ease;
 }
 
-/* ========== 页面加载器 ========== */
+/* ========== Page Loader ========== */
 .bs-loader {
     position: fixed;
     inset: 0;
@@ -47,7 +42,7 @@
     to { transform: rotate(360deg); }
 }
 
-/* ========== 导航栏 ========== */
+/* ========== Navigation Bar ========== */
 .bs-navbar {
     background: rgba(255,255,255,0.96);
     border-bottom: 1px solid var(--bs-gray-200);
@@ -157,7 +152,7 @@
     font-size: 0.9em;
 }
 
-/* ========== 主内容区 ========== */
+/* ========== Main Content Area ========== */
 .bs-main {
     max-width: 1200px;
     margin: 0 auto;
@@ -173,7 +168,7 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ========== 消息提示 ========== */
+/* ========== Message Notifications ========== */
 .bs-messages-container {
     max-width: 1200px;
     margin: 0 auto 20px;
@@ -199,7 +194,7 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 消息级别颜色 */
+/* Message Level Colors */
 .bs-message-success {
     background-color: #d4edda;
     color: #155724;
@@ -224,7 +219,7 @@
     border-left-color: #17a2b8;
 }
 
-/* 关闭按钮 */
+/* Close Button */
 .bs-message-close {
     background: transparent;
     border: none;
@@ -245,7 +240,7 @@
     flex: 1;
 }
 
-/* 响应式调整 */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .bs-messages-container {
         padding: 0 15px;
@@ -256,7 +251,7 @@
     }
 }
 
-/* ========== 响应式 ========== */
+/* ========== Responsive ========== */
 @media (max-width: 768px) {
     .bs-menu-btn {
         display: block;
@@ -290,8 +285,7 @@
     }
 }
 
-/* ========== 子模板保护 ========== */
-/* 确保 base 样式只影响带 bs- 前缀的元素，不污染子模板 */
+/* ========== Sub-template Protection ========== */
 #bsContent * {
-    /* 重置可能继承的样式，但保留子模板的自定义样式 */
+    
 }

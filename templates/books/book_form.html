@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    {% if object %}编辑书籍{% else %}添加书籍{% endif %}
+    {% if object %}Edit Book{% else %}Add Book{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -11,14 +11,14 @@
 
 <div class="form-container">
     <div class="form-box">
-        <h1>{% if object %}编辑书籍{% else %}添加书籍{% endif %}</h1>
+        <h1>{% if object %}Edit Book{% else %}Add Book{% endif %}</h1>
         
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }} <!-- Render form fields as <p> tags -->
             
-            <button type="submit" class="btn btn-primary">保存</button>
-            <a href="{% url 'book_list' %}" class="btn btn-secondary">取消</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>

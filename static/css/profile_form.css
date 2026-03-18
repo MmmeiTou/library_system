@@ -1,4 +1,4 @@
-/* ==================== 基础样式 ==================== */
+/* ==================== Basic Styles ==================== */
 body {
     font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
     background: white;
@@ -6,7 +6,7 @@ body {
     padding: 40px 20px;
 }
 
-/* ==================== 主容器 ==================== */
+/* ==================== Main Container ==================== */
 .container {
     max-width: 520px;
     margin: 0 auto;
@@ -19,7 +19,7 @@ body {
     overflow: hidden;
 }
 
-/* ==================== 卡片头部 ==================== */
+/* ==================== Card Header ==================== */
 .card-header {
     padding: 24px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -33,7 +33,7 @@ body {
     margin: 0;
 }
 
-/* ==================== 表单样式 ==================== */
+/* ==================== Form Styles ==================== */
 .profile-form {
     padding: 24px;
 }
@@ -63,7 +63,7 @@ body {
     gap: 16px;
 }
 
-/* ==================== 表单控件美化 ==================== */
+/* ==================== Form Control Styling ==================== */
 .form-fields p {
     margin: 0;
 }
@@ -102,7 +102,7 @@ body {
     color: #9ca3af;
 }
 
-/* ==================== 错误提示 ==================== */
+/* ==================== Error Messages ==================== */
 .form-fields .errorlist {
     list-style: none;
     padding: 0;
@@ -120,7 +120,7 @@ body {
     border-color: #dc2626;
 }
 
-/* ==================== 按钮区域 ==================== */
+/* ==================== Button Area ==================== */
 .form-actions {
     display: flex;
     gap: 12px;
@@ -162,7 +162,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* ==================== 响应式 ==================== */
+/* ==================== Responsive ==================== */
 @media (max-width: 520px) {
     body {
         padding: 20px 16px;

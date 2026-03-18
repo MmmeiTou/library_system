@@ -12,10 +12,11 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='loanrecord',
-            options={'ordering': ['-loan_date'], 'verbose_name': '借阅记录', 'verbose_name_plural': '借阅记录'},
+            options={'ordering': ['-loan_date'], 'verbose_name': 'Loan Record', 'verbose_name_plural': 'Loan Records'},
         ),
         migrations.RemoveField(
             model_name='loanrecord',
             name='return_date',
         ),
     ]
+    

@@ -8,16 +8,16 @@
 
 <div class="register-container">
     <div class="register-box">
-        <h2>👤 管理员注册</h2>
+        <h2>👤 Librarian Registration</h2>
         
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}  <!-- Render form fields as <p> tags with automatic name and value binding -->
-            <button type="submit">注册</button>
+            <button type="submit">Register</button>
         </form>
 
         <p class="login-link">
-            已有账号？ <a href="{% url 'login' %}">前往登录</a>
+            Already have an account? <a href="{% url 'login' %}">Go to Login</a>
         </p>
     </div>
 </div>

@@ -45,10 +45,10 @@ INSTALLED_APPS = [
 
 #editpart
 AUTH_USER_MODEL = 'accounts.User'
-LOGIN_URL = 'login'          # 未登录用户重定向的URL名称
+LOGIN_URL = 'login'          # URL name for redirecting unauthenticated users
 from django.urls import reverse_lazy
-LOGIN_REDIRECT_URL = reverse_lazy('home') #登录成功跳转
-LOGOUT_REDIRECT_URL = 'login' # 注销后跳转
+LOGIN_REDIRECT_URL = reverse_lazy('home') # Redirect after successful login
+LOGOUT_REDIRECT_URL = 'login' # Redirect after logout
 #
 
 

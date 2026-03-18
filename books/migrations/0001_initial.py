@@ -16,13 +16,13 @@ class Migration(migrations.Migration):
             name='Book',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200, verbose_name='书名')),
-                ('author', models.CharField(max_length=100, verbose_name='作者')),
-                ('available_copies', models.PositiveIntegerField(default=1, validators=[django.core.validators.MinValueValidator(0)], verbose_name='剩余数量')),
+                ('title', models.CharField(max_length=200, verbose_name='Title')),
+                ('author', models.CharField(max_length=100, verbose_name='Author')),
+                ('available_copies', models.PositiveIntegerField(default=1, validators=[django.core.validators.MinValueValidator(0)], verbose_name='Available Copies')),
             ],
             options={
-                'verbose_name': '图书',
-                'verbose_name_plural': '图书',
+                'verbose_name': 'Book',
+                'verbose_name_plural': 'Books',
             },
         ),
     ]

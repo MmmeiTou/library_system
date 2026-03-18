@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='book',
             name='book_id',
-            field=models.CharField(blank=True, max_length=50, unique=True, verbose_name='图书编号'),
+            field=models.CharField(blank=True, max_length=50, unique=True, verbose_name='Book ID'),
         ),
     ]

@@ -1,17 +1,14 @@
-// 等待DOM加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
-    // 获取表单元素（适配Django form.as_p结构）
     const form = document.querySelector('form');
-    // 定义学生注册常见字段（根据实际业务调整，若字段名不同可修改）
     const fieldSelectors = {
-        username: form.querySelector('input[name="username"]'), // 用户名
-        email: form.querySelector('input[name="email"]'),       // 邮箱
-        student_id: form.querySelector('input[name="student_id"]'), // 学号
-        password1: form.querySelector('input[name="password1"]'),   // 密码
-        password2: form.querySelector('input[name="password2"]')    // 确认密码
+        username: form.querySelector('input[name="username"]'), 
+        email: form.querySelector('input[name="email"]'),       
+        student_id: form.querySelector('input[name="student_id"]'), 
+        password1: form.querySelector('input[name="password1"]'),   
+        password2: form.querySelector('input[name="password2"]')    
     };
 
-    // 创建统一的错误提示容器（如果不存在）
+    // Create a unified error message container
     let errorContainer = form.querySelector('.signup-error-container');
     if (!errorContainer) {
         errorContainer = document.createElement('div');
@@ -25,63 +22,56 @@ document.addEventListener('DOMContentLoaded', function() {
             margin: 15px 0;
             display: none;
         `;
-        // 将错误提示插入到提交按钮上方
         const submitBtn = form.querySelector('button[type="submit"]');
         submitBtn.parentNode.insertBefore(errorContainer, submitBtn);
     }
 
     /**
-     * 表单验证核心函数
-     * @returns {Boolean} 验证通过返回true，否则false
+     * Core form validation function
+     * @returns {Boolean} Returns true if validation passes, otherwise false
      */
     const validateSignupForm = function() {
         let errorMessages = [];
 
-        // 1. 验证用户名
         if (fieldSelectors.username) {
             if (!fieldSelectors.username.value.trim()) {
-                errorMessages.push('✖ 用户名不能为空');
+                errorMessages.push('✖ Username cannot be empty');
             } 
         }
 
-        // 2. 验证邮箱（如果有邮箱字段）
         if (fieldSelectors.email && fieldSelectors.email.value.trim()) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(fieldSelectors.email.value)) {
-                errorMessages.push('✖ 请输入有效的邮箱地址');
+                errorMessages.push('✖ Please enter a valid email address');
             }
         }
 
-        // 3. 验证学号（如果有学号字段）
         if (fieldSelectors.student_id) {
             if (!fieldSelectors.student_id.value.trim()) {
-                errorMessages.push('✖ 学号不能为空');
+                errorMessages.push('✖ Student ID cannot be empty');
             } 
         }
 
-        // 4. 验证密码
         if (fieldSelectors.password1) {
             if (!fieldSelectors.password1.value.trim()) {
-                errorMessages.push('✖ 密码不能为空');
+                errorMessages.push('✖ Password cannot be empty');
             } else {
-                // 密码长度验证
                 if (fieldSelectors.password1.value.length < 4) {
-                    errorMessages.push('✖ 密码长度不能少于4位');
+                    errorMessages.push('✖ Password must be at least 4 characters long');
                 }
                 
             }
         }
 
-        // 5. 验证确认密码
         if (fieldSelectors.password2) {
             if (!fieldSelectors.password2.value.trim()) {
-                errorMessages.push('✖ 请确认密码');
+                errorMessages.push('✖ Please confirm your password');
             } else if (fieldSelectors.password1 && fieldSelectors.password1.value !== fieldSelectors.password2.value) {
-                errorMessages.push('✖ 两次输入的密码不一致');
+                errorMessages.push('✖ The two passwords do not match');
             }
         }
 
-        // 显示/隐藏错误提示
+        // Show/hide error messages
         if (errorMessages.length > 0) {
             errorContainer.innerHTML = errorMessages.join('<br>');
             errorContainer.style.display = 'block';
@@ -92,12 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // 为所有输入框添加实时验证（失去焦点时）
+    // Add real-time validation for all input fields
     Object.values(fieldSelectors).forEach(input => {
         if (input) {
-            // 失去焦点验证
             input.addEventListener('blur', validateSignupForm);
-            // 输入时实时更新验证状态
+            // Update validation status in real time while typing
             input.addEventListener('input', function() {
                 if (errorContainer.style.display === 'block') {
                     validateSignupForm();
@@ -106,11 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 表单提交时的最终验证
+    // Final validation on form submission
     form.addEventListener('submit', function(e) {
         if (!validateSignupForm()) {
-            e.preventDefault(); // 阻止表单提交
-            // 滚动到错误提示位置（平滑滚动）
+            e.preventDefault(); // Prevent form submission
             errorContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     });

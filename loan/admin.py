@@ -11,4 +11,4 @@ class LoanRecordAdmin(admin.ModelAdmin):
 
     def status_display(self, obj):
         return obj.get_status_display_with_overdue()
-    status_display.short_description = '状态'
+    status_display.short_description = 'Status'

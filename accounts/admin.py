@@ -10,16 +10,11 @@ from django.contrib.admin.utils import quote
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'student_id','user__email')   # 在列表页显示的字段
-    search_fields = ('user__username', 'student_id') # 添加搜索框
-  
-
-
+    list_display = ('user', 'student_id', 'user__email')   # Fields displayed in the list view
+    search_fields = ('user__username', 'student_id')      # Add search box
 
 
 @admin.register(Librarian)
 class Librariantest(admin.ModelAdmin):
-    list_display=('user', 'employee_id')
+    list_display = ('user', 'employee_id')
     search_fields = ('user__username', 'employee_id')
-
-
