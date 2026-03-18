@@ -43,13 +43,14 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 class BookCreateView(LibrarianRequiredMixin, CreateView):
     model = Book
-    fields = ['book_id', 'title', 'author', 'available_copies']  # Include book_id, can be auto-generated
+    fields = ['book_id', 'title', 'author', 'available_copies']
     template_name = 'books/book_form.html'
-    success_url = reverse_lazy('book_list')  # Redirect to list page after completion
+    success_url = reverse_lazy('book_list')
 
     def form_valid(self, form):
-        # Auto-generate book_id (example: based on title and author, or use UUID)
-        form.instance.book_id = self.generate_book_id(form.cleaned_data)
+        # Auto-generate book_id if user didn't provide one or left it blank
+        if not form.cleaned_data.get('book_id'):
+            form.instance.book_id = self.generate_book_id(form.cleaned_data)
         return super().form_valid(form)
 
     def generate_book_id(self, cleaned_data):
