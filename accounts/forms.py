@@ -9,7 +9,7 @@ class StudentRegistrationForm(forms.ModelForm):
     password1 = forms.CharField(
         label='密码',
         widget=forms.PasswordInput,
-        help_text='密码长度必须大于4位'
+        help_text=''
     )
     password2 = forms.CharField(
         label='确认密码',
@@ -24,8 +24,8 @@ class StudentRegistrationForm(forms.ModelForm):
         password1 = self.cleaned_data.get('password1')
         if not password1:
             raise forms.ValidationError('请输入密码')
-        if len(password1) <= 4:
-            raise forms.ValidationError('密码长度必须大于4位')
+        if len(password1) < 4:
+            raise forms.ValidationError('密码长度不能少于4位')
         return password1
 
     def clean_password2(self):
@@ -54,7 +54,7 @@ class LibrarianRegistrationForm(forms.ModelForm):
     password1 = forms.CharField(
         label='密码',
         widget=forms.PasswordInput,
-        help_text='密码长度必须大于4位'
+        help_text=''
     )
     password2 = forms.CharField(
         label='确认密码',
@@ -69,8 +69,8 @@ class LibrarianRegistrationForm(forms.ModelForm):
         password1 = self.cleaned_data.get('password1')
         if not password1:
             raise forms.ValidationError('请输入密码')
-        if len(password1) <= 4:
-            raise forms.ValidationError('密码长度必须大于4位')
+        if len(password1) < 4:
+            raise forms.ValidationError('密码长度不能少于4位')
         return password1
 
     def clean_password2(self):
@@ -164,3 +164,57 @@ class LibrarianProfileForm(forms.ModelForm):
         if Librarian.objects.exclude(pk=self.instance.pk).filter(employee_id=employee_id).exists():
             raise forms.ValidationError('该工号已存在')
         return employee_id
+    
+
+
+class CustomPasswordChangeForm(forms.Form):
+    old_password = forms.CharField(
+        label='旧密码',
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+    )
+    new_password1 = forms.CharField(
+        label='新密码',
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        help_text=''  # 如果需要帮助文本，可以填写；否则留空
+    )
+    new_password2 = forms.CharField(
+        label='确认新密码',
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        help_text=''
+    )
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def clean_old_password(self):
+        """验证旧密码是否正确"""
+        old_password = self.cleaned_data.get('old_password')
+        if not self.user.check_password(old_password):
+            raise forms.ValidationError('旧密码不正确')
+        return old_password
+
+    def clean_new_password1(self):
+        """自定义新密码规则：长度 >= 4 位"""
+        new_password1 = self.cleaned_data.get('new_password1')
+        if not new_password1:
+            raise forms.ValidationError('请输入新密码')
+        if len(new_password1) < 4:
+            raise forms.ValidationError('新密码长度不能少于4位')
+        return new_password1
+
+    def clean_new_password2(self):
+        """验证两次新密码是否一致"""
+        new_password1 = self.cleaned_data.get('new_password1')
+        new_password2 = self.cleaned_data.get('new_password2')
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise forms.ValidationError('两次输入的新密码不一致')
+        return new_password2
+
+    def save(self, commit=True):
+        """保存新密码到用户对象"""
+        password = self.cleaned_data['new_password1']
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user

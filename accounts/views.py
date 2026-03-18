@@ -117,10 +117,17 @@ def profile_detail(request):
     context = {'user_obj': user}
     return render(request, 'accounts/profile_detail.html', context)
 
+
+from django.db import transaction
+from loan.models import LoanRecord  # 导入借阅记录模型
+
 # 编辑个人资料
 @login_required
+@transaction.atomic  # 保证用户名和借阅记录同时更新成功或失败
 def profile_edit(request):
     user = request.user
+    old_username = user.username  # 保存旧用户名，用于后续更新借阅记录
+
     # 根据用户类型选择对应的 Profile 表单
     if hasattr(user, 'student_profile'):
         profile = user.student_profile
@@ -135,9 +142,18 @@ def profile_edit(request):
     if request.method == 'POST':
         user_form = UserEditForm(request.POST, instance=user)
         profile_form = ProfileForm(request.POST, instance=profile)
+
         if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+            saved_user = user_form.save()      # 保存用户信息（可能包含新用户名）
             profile_form.save()
+
+            new_username = saved_user.username
+            # 如果用户名确实改变了，更新所有相关借阅记录中的 student_username
+            if new_username != old_username:
+                updated_count = LoanRecord.objects.filter(student_username=old_username).update(student_username=new_username)
+                if updated_count > 0:
+                    messages.info(request, f'已同步更新 {updated_count} 条借阅记录的用户名')
+
             messages.success(request, '个人资料更新成功')
             return redirect('profile_detail')
         else:
@@ -152,10 +168,14 @@ def profile_edit(request):
     }
     return render(request, 'accounts/profile_form.html', context)
 
-# 自定义密码修改视图（使用内置 PasswordChangeView，仅指定模板和跳转地址）
+
+
+from .forms import CustomPasswordChangeForm  # 导入自定义表单
+
 class CustomPasswordChangeView(PasswordChangeView):
     template_name = 'accounts/password_change_form.html'
     success_url = reverse_lazy('profile_detail')
+    form_class = CustomPasswordChangeForm  # 指定自定义表单
 
     def form_valid(self, form):
         messages.success(self.request, '密码修改成功')
